@@ -39,6 +39,8 @@ const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
     'https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2',
   [ChainId.RINKEBY]:
     'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v2-rinkeby',
+  [ChainId.GNOSIS]:
+    'https://api.thegraph.com/subgraphs/name/1hive/honeyswap-v2',
 };
 
 const threshold = 0.025;

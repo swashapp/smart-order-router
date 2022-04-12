@@ -329,7 +329,73 @@ export const USDC_POLYGON = new Token(
   'USDC',
   'USD//C'
 );
+// gnosis tokens
 
+export const WETH_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1',
+  18,
+  'WETH',
+  'Wrapped Ether'
+);
+export const USDC_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83',
+  18,
+  'USDC',
+  'USDC'
+);
+export const USDT_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x4ECaBa5870353805a9F068101A40E0f32ed605C6',
+  18,
+  'USDT',
+  'USDT'
+);
+export const WBTC_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x8e5bBbb09Ed1ebdE8674Cda39A0c169401db4252',
+  18,
+  'WBTC',
+  'Wrapped BTC'
+);
+export const HONEY_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x71850b7e9ee3f13ab46d67167341e4bdc905eef9',
+  18,
+  'HNY',
+  'Honey'
+);
+export const AGVE_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x3a97704a1b25F08aa230ae53B352e2e72ef52843',
+  18,
+  'AGVE',
+  'Agave token'
+);
+export const GIV_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x4f4f9b8d5b4d0dc10506e5551b0513b61fd59e75',
+  18,
+  'GIV',
+  'Giveth'
+);
+export const TEC_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x5df8339c5e282ee48c0c7ce8a7d01a73d38b3b27',
+  18,
+  'TEC',
+  'Token Engineering Commons'
+);
+export const GNO_GNOSIS = new Token(
+  ChainId.GNOSIS,
+  '0x9c58bacc331c9aa871afd802db6379a98e80cedb',
+  18,
+  'GNO',
+  'Gnosis Token'
+);
+
+//
 export const DAI_POLYGON = new Token(
   ChainId.POLYGON,
   '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',

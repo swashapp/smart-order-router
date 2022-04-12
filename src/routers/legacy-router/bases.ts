@@ -1,10 +1,19 @@
 import { Token } from '@uniswap/sdk-core';
 import {
+  AGVE_GNOSIS,
   DAI_MAINNET,
+  GIV_GNOSIS,
+  GNO_GNOSIS,
+  HONEY_GNOSIS,
   ITokenProvider,
+  TEC_GNOSIS,
+  USDC_GNOSIS,
   USDC_MAINNET,
+  USDT_GNOSIS,
   USDT_MAINNET,
+  WBTC_GNOSIS,
   WBTC_MAINNET,
+  WETH_GNOSIS,
   WMATIC_POLYGON,
   WMATIC_POLYGON_MUMBAI,
 } from '../../providers/token-provider';
@@ -38,6 +47,18 @@ export const BASES_TO_CHECK_TRADES_AGAINST = (
       WRAPPED_NATIVE_CURRENCY[ChainId.ARBITRUM_RINKEBY]!,
     ],
     [ChainId.POLYGON]: [WMATIC_POLYGON],
+    [ChainId.GNOSIS]: [
+      WRAPPED_NATIVE_CURRENCY[ChainId.GNOSIS]!,
+      WETH_GNOSIS,
+      USDC_GNOSIS,
+      USDT_GNOSIS,
+      WBTC_GNOSIS,
+      HONEY_GNOSIS,
+      AGVE_GNOSIS,
+      GIV_GNOSIS,
+      TEC_GNOSIS,
+      GNO_GNOSIS,
+    ],
     [ChainId.POLYGON_MUMBAI]: [WMATIC_POLYGON_MUMBAI],
   };
 };

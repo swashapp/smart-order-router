@@ -51,6 +51,13 @@ export const WETH9: {
     'WETH',
     'Wrapped Ether'
   ),
+  [ChainId.GNOSIS]: new Token(
+    ChainId.GNOSIS,
+    '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
+    18,
+    'WXDAI',
+    'Wrapped XDAI'
+  ),
   [ChainId.KOVAN]: new Token(
     ChainId.KOVAN,
     '0xd0A1E359811322d97991E03f863a0C30C2cF029C',

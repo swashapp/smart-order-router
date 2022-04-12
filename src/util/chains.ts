@@ -11,6 +11,7 @@ export enum ChainId {
   ARBITRUM_RINKEBY = 421611,
   POLYGON = 137,
   POLYGON_MUMBAI = 80001,
+  GNOSIS=100,
 }
 
 export const V2_SUPPORTED = [
@@ -19,6 +20,7 @@ export const V2_SUPPORTED = [
   ChainId.GÖRLI,
   ChainId.RINKEBY,
   ChainId.ROPSTEN,
+  ChainId.GNOSIS,
 ];
 
 export const HAS_L1_FEE = [
@@ -52,6 +54,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.POLYGON;
     case 80001:
       return ChainId.POLYGON_MUMBAI;
+    case 100:
+      return ChainId.GNOSIS;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -64,6 +68,7 @@ export enum ChainName {
   RINKEBY = 'rinkeby',
   GÖRLI = 'goerli',
   KOVAN = 'kovan',
+  BSC='bsc',
   OPTIMISM = 'optimism-mainnet',
   OPTIMISTIC_KOVAN = 'optimism-kovan',
   ARBITRUM_ONE = 'arbitrum-mainnet',
@@ -76,12 +81,14 @@ export enum NativeCurrencyName {
   // Strings match input for CLI
   ETHER = 'ETH',
   MATIC = 'MATIC',
+  XDAI='XDAI',
 }
 
 export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
   [ChainId.MAINNET]: NativeCurrencyName.ETHER,
   [ChainId.ROPSTEN]: NativeCurrencyName.ETHER,
   [ChainId.RINKEBY]: NativeCurrencyName.ETHER,
+  [ChainId.GNOSIS]: NativeCurrencyName.XDAI,
   [ChainId.GÖRLI]: NativeCurrencyName.ETHER,
   [ChainId.KOVAN]: NativeCurrencyName.ETHER,
   [ChainId.OPTIMISM]: NativeCurrencyName.ETHER,
@@ -116,6 +123,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.POLYGON;
     case 80001:
       return ChainName.POLYGON_MUMBAI;
+    case 56:
+      return ChainName.BSC;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -147,6 +156,8 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
       return process.env.JSON_RPC_PROVIDER_ARBITRUM_RINKEBY!;
     case ChainId.POLYGON:
       return process.env.JSON_RPC_PROVIDER_POLYGON!;
+    case ChainId.GNOSIS:
+      return process.env.JSON_RPC_PROVIDER_GNOSIS!;
     case ChainId.POLYGON_MUMBAI:
       return process.env.JSON_RPC_PROVIDER_POLYGON_MUMBAI!;
     default:
@@ -217,6 +228,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     18,
     'WETH',
     'Wrapped Ether'
+  ),
+  [ChainId.GNOSIS]: new Token(
+    ChainId.GNOSIS,
+    '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
+    18,
+    'WXDAI',
+    'Wrapped XDAI'
   ),
   [ChainId.POLYGON]: new Token(
     ChainId.POLYGON,

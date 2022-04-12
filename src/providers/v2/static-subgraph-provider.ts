@@ -4,12 +4,21 @@ import _ from 'lodash';
 import { ChainId, WRAPPED_NATIVE_CURRENCY } from '../../util/chains';
 import { log } from '../../util/log';
 import {
+  AGVE_GNOSIS,
   DAI_MAINNET,
   DAI_RINKEBY_1,
   DAI_RINKEBY_2,
+  GIV_GNOSIS,
+  GNO_GNOSIS,
+  HONEY_GNOSIS,
+  TEC_GNOSIS,
+  USDC_GNOSIS,
   USDC_MAINNET,
+  USDT_GNOSIS,
   USDT_MAINNET,
+  WBTC_GNOSIS,
   WBTC_MAINNET,
+  WETH_GNOSIS,
 } from '../token-provider';
 import { IV2SubgraphProvider, V2SubgraphPool } from './subgraph-provider';
 
@@ -39,6 +48,18 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.ARBITRUM_RINKEBY]: [],
   [ChainId.OPTIMISTIC_KOVAN]: [],
   [ChainId.POLYGON]: [],
+  [ChainId.GNOSIS]: [
+    WRAPPED_NATIVE_CURRENCY[ChainId.GNOSIS]!,
+    WETH_GNOSIS,
+    USDC_GNOSIS,
+    USDT_GNOSIS,
+    WBTC_GNOSIS,
+    HONEY_GNOSIS,
+    AGVE_GNOSIS,
+    GIV_GNOSIS,
+    TEC_GNOSIS,
+    GNO_GNOSIS,
+  ],
   [ChainId.POLYGON_MUMBAI]: [],
 };
 
