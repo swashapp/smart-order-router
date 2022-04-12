@@ -74,6 +74,7 @@ export enum ChainName {
   ARBITRUM_ONE = 'arbitrum-mainnet',
   ARBITRUM_RINKEBY = 'arbitrum-rinkeby',
   POLYGON = 'polygon-mainnet',
+  GNOSIS='gnosis',
   POLYGON_MUMBAI = 'polygon-mumbai',
 }
 
@@ -119,6 +120,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.ARBITRUM_ONE;
     case 421611:
       return ChainName.ARBITRUM_RINKEBY;
+    case 100:
+      return ChainName.GNOSIS;
     case 137:
       return ChainName.POLYGON;
     case 80001:
