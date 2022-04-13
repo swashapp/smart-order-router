@@ -13,6 +13,7 @@ import {
   DAI_RINKEBY_2,
   DAI_ROPSTEN,
   USDC_ARBITRUM,
+  USDC_GNOSIS,
   USDC_GÖRLI,
   USDC_KOVAN,
   USDC_MAINNET,
@@ -59,6 +60,7 @@ export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
   [ChainId.KOVAN]: [DAI_KOVAN, USDC_KOVAN, USDT_KOVAN],
   [ChainId.GÖRLI]: [USDC_GÖRLI, USDT_GÖRLI, WBTC_GÖRLI, DAI_GÖRLI],
   [ChainId.ROPSTEN]: [DAI_ROPSTEN, USDC_ROPSTEN, USDT_ROPSTEN],
+  [ChainId.GNOSIS]: [USDC_GNOSIS],
   [ChainId.POLYGON]: [USDC_POLYGON],
   [ChainId.POLYGON_MUMBAI]: [DAI_POLYGON_MUMBAI],
 };

@@ -11,7 +11,10 @@ export class CurrencyAmount extends CurrencyAmountRaw<Currency> {}
 // Try to parse a user entered amount for a given token
 export function parseAmount(value: string, currency: Currency): CurrencyAmount {
   const typedValueParsed = parseUnits(value, currency.decimals).toString();
-  return CurrencyAmount.fromRawAmount(currency, JSBI.BigInt(typedValueParsed));
+  return CurrencyAmount.fromRawAmount(
+    currency,
+    JSBI.BigInt(typedValueParsed).toString()
+  );
 }
 
 export function parseFeeAmount(feeAmountStr: string) {

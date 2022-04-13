@@ -138,6 +138,7 @@ export class V2PoolProvider implements IV2PoolProvider {
       const { reserve0, reserve1 } = reservesResult.result;
 
       const pool = new Pair(
+        // @ts-ignore
         CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
         CurrencyAmount.fromRawAmount(token1, reserve1.toString())
       );

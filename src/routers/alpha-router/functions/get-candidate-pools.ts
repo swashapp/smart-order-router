@@ -5,7 +5,10 @@ import _ from 'lodash';
 import {
   ITokenListProvider,
   IV2SubgraphProvider,
+  USDC_GNOSIS,
+  USDT_GNOSIS,
   V2SubgraphPool,
+  WXDAI_GNOSIS,
 } from '../../../providers';
 import {
   DAI_ARBITRUM,
@@ -122,6 +125,7 @@ const baseTokensByChain: { [chainId in ChainId]?: Token[] } = {
     USDT_ARBITRUM,
   ],
   [ChainId.ARBITRUM_RINKEBY]: [DAI_ARBITRUM_RINKEBY, USDT_ARBITRUM_RINKEBY],
+  [ChainId.GNOSIS]: [USDC_GNOSIS, USDT_GNOSIS, WXDAI_GNOSIS],
   [ChainId.POLYGON]: [USDC_POLYGON, WMATIC_POLYGON],
   [ChainId.POLYGON_MUMBAI]: [DAI_POLYGON_MUMBAI, WMATIC_POLYGON_MUMBAI],
 };
@@ -318,7 +322,10 @@ export async function getV3CandidatePools({
       tokenOut.symbol != 'ETH') ||
     (WRAPPED_NATIVE_CURRENCY[chainId]?.symbol == WMATIC_POLYGON.symbol &&
       tokenOut.symbol != 'MATIC' &&
-      tokenOut.symbol != 'WMATIC')
+      tokenOut.symbol != 'WMATIC') ||
+    (WRAPPED_NATIVE_CURRENCY[chainId]?.symbol == WXDAI_GNOSIS.symbol &&
+      tokenOut.symbol != 'XDAI' &&
+      tokenOut.symbol != 'WXDAI')
   ) {
     top2EthQuoteTokenPool = _(subgraphPoolsSorted)
       .filter((subgraphPool) => {

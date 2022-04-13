@@ -67,7 +67,9 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
             ? usdPool.token0Price
             : usdPool.token1Price;
 
+          // @ts-ignore
           const gasCostInTermsOfUSD: CurrencyAmount = ethTokenPrice.quote(
+            // @ts-ignore
             gasCostInEth
           ) as CurrencyAmount;
 
@@ -128,7 +130,9 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
 
         let gasCostInTermsOfQuoteToken: CurrencyAmount;
         try {
+          // @ts-ignore
           gasCostInTermsOfQuoteToken = ethTokenPrice.quote(
+            // @ts-ignore
             gasCostInEth
           ) as CurrencyAmount;
         } catch (err) {
@@ -152,7 +156,9 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
 
         let gasCostInTermsOfUSD: CurrencyAmount;
         try {
+          // @ts-ignore
           gasCostInTermsOfUSD = ethTokenPriceUSDPool.quote(
+            // @ts-ignore
             gasCostInEth
           ) as CurrencyAmount;
         } catch (err) {

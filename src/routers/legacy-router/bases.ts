@@ -7,6 +7,7 @@ import {
   WBTC_MAINNET,
   WMATIC_POLYGON,
   WMATIC_POLYGON_MUMBAI,
+  WXDAI_GNOSIS,
 } from '../../providers/token-provider';
 import { ChainId, WRAPPED_NATIVE_CURRENCY } from '../../util/chains';
 
@@ -37,6 +38,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST = (
     [ChainId.ARBITRUM_RINKEBY]: [
       WRAPPED_NATIVE_CURRENCY[ChainId.ARBITRUM_RINKEBY]!,
     ],
+    [ChainId.GNOSIS]: [WXDAI_GNOSIS],
     [ChainId.POLYGON]: [WMATIC_POLYGON],
     [ChainId.POLYGON_MUMBAI]: [WMATIC_POLYGON_MUMBAI],
   };

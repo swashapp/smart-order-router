@@ -235,7 +235,12 @@ export abstract class BaseCommand extends Command {
       );
     }
 
-    const multicall2Provider = new UniswapMulticallProvider(chainId, provider);
+    const multicall2Provider = new UniswapMulticallProvider(
+      chainId,
+      provider,
+      undefined,
+      '0xe56A6B2Ed6fA3c7c3b9a4A2cE0A51d5dd0f5b8E5'
+    );
     this._multicall2Provider = multicall2Provider;
     this._poolProvider = new V3PoolProvider(chainId, multicall2Provider);
 

@@ -72,7 +72,9 @@ export class V2QuoteProvider implements IV2QuoteProvider {
             let outputAmount = amount.wrapped;
 
             for (const pair of route.pairs) {
+              // @ts-ignore
               const [outputAmountNew] = pair.getOutputAmount(outputAmount);
+              // @ts-ignore
               outputAmount = outputAmountNew;
             }
 
@@ -85,6 +87,7 @@ export class V2QuoteProvider implements IV2QuoteProvider {
 
             for (let i = route.pairs.length - 1; i >= 0; i--) {
               const pair = route.pairs[i]!;
+              // @ts-ignore
               [inputAmount] = pair.getInputAmount(inputAmount);
             }
 

@@ -9,6 +9,7 @@ export enum ChainId {
   OPTIMISTIC_KOVAN = 69,
   ARBITRUM_ONE = 42161,
   ARBITRUM_RINKEBY = 421611,
+  GNOSIS = 100,
   POLYGON = 137,
   POLYGON_MUMBAI = 80001,
 }
@@ -19,6 +20,7 @@ export const V2_SUPPORTED = [
   ChainId.GÖRLI,
   ChainId.RINKEBY,
   ChainId.ROPSTEN,
+  ChainId.GNOSIS,
 ];
 
 export const HAS_L1_FEE = [
@@ -48,6 +50,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.ARBITRUM_ONE;
     case 421611:
       return ChainId.ARBITRUM_RINKEBY;
+    case 100:
+      return ChainId.GNOSIS;
     case 137:
       return ChainId.POLYGON;
     case 80001:
@@ -68,6 +72,7 @@ export enum ChainName {
   OPTIMISTIC_KOVAN = 'optimism-kovan',
   ARBITRUM_ONE = 'arbitrum-mainnet',
   ARBITRUM_RINKEBY = 'arbitrum-rinkeby',
+  GNOSIS = 'gnosis-mainnet',
   POLYGON = 'polygon-mainnet',
   POLYGON_MUMBAI = 'polygon-mumbai',
 }
@@ -76,6 +81,7 @@ export enum NativeCurrencyName {
   // Strings match input for CLI
   ETHER = 'ETH',
   MATIC = 'MATIC',
+  XDAI = 'XDAI',
 }
 
 export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
@@ -88,6 +94,7 @@ export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
   [ChainId.OPTIMISTIC_KOVAN]: NativeCurrencyName.ETHER,
   [ChainId.ARBITRUM_ONE]: NativeCurrencyName.ETHER,
   [ChainId.ARBITRUM_RINKEBY]: NativeCurrencyName.ETHER,
+  [ChainId.GNOSIS]: NativeCurrencyName.XDAI,
   [ChainId.POLYGON]: NativeCurrencyName.MATIC,
   [ChainId.POLYGON_MUMBAI]: NativeCurrencyName.MATIC,
 };
@@ -112,6 +119,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.ARBITRUM_ONE;
     case 421611:
       return ChainName.ARBITRUM_RINKEBY;
+    case 100:
+      return ChainName.GNOSIS;
     case 137:
       return ChainName.POLYGON;
     case 80001:
@@ -145,6 +154,8 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
       return process.env.JSON_RPC_PROVIDER_ARBITRUM_ONE!;
     case ChainId.ARBITRUM_RINKEBY:
       return process.env.JSON_RPC_PROVIDER_ARBITRUM_RINKEBY!;
+    case ChainId.GNOSIS:
+      return process.env.JSON_RPC_PROVIDER_GNOSIS!;
     case ChainId.POLYGON:
       return process.env.JSON_RPC_PROVIDER_POLYGON!;
     case ChainId.POLYGON_MUMBAI:
@@ -218,6 +229,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     'WETH',
     'Wrapped Ether'
   ),
+  [ChainId.GNOSIS]: new Token(
+    ChainId.GNOSIS,
+    '0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d',
+    18,
+    'WXDAI',
+    'Wrapped XDAI'
+  ),
   [ChainId.POLYGON]: new Token(
     ChainId.POLYGON,
     '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
@@ -234,10 +252,34 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
   ),
 };
 
+function isGnosis(chainId: number): chainId is ChainId.GNOSIS {
+  return chainId === ChainId.GNOSIS;
+}
+
 function isMatic(
   chainId: number
 ): chainId is ChainId.POLYGON | ChainId.POLYGON_MUMBAI {
   return chainId === ChainId.POLYGON_MUMBAI || chainId === ChainId.POLYGON;
+}
+
+class GnosisNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId;
+  }
+
+  get wrapped(): Token {
+    if (!isGnosis(this.chainId)) throw new Error('Not gnosis');
+    const nativeCurrency = WRAPPED_NATIVE_CURRENCY[this.chainId];
+    if (nativeCurrency) {
+      return nativeCurrency;
+    }
+    throw new Error(`Does not support this chain ${this.chainId}`);
+  }
+
+  public constructor(chainId: number) {
+    if (!isGnosis(chainId)) throw new Error('Not gnosis');
+    super(chainId, 18, 'XDAI', 'Gnosis XDAI');
+  }
 }
 
 class MaticNativeCurrency extends NativeCurrency {
@@ -278,12 +320,16 @@ export class ExtendedEther extends Ether {
   }
 }
 
+function getNativeToken(chainId: number): NativeCurrency {
+  if (isGnosis(chainId)) return new GnosisNativeCurrency(chainId);
+  else if (isMatic(chainId)) return new MaticNativeCurrency(chainId);
+  else return ExtendedEther.onChain(chainId);
+}
+
 const cachedNativeCurrency: { [chainId: number]: NativeCurrency } = {};
 export function nativeOnChain(chainId: number): NativeCurrency {
   return (
     cachedNativeCurrency[chainId] ??
-    (cachedNativeCurrency[chainId] = isMatic(chainId)
-      ? new MaticNativeCurrency(chainId)
-      : ExtendedEther.onChain(chainId))
+    (cachedNativeCurrency[chainId] = getNativeToken(chainId))
   );
 }

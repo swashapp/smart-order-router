@@ -39,6 +39,8 @@ const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
     'https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2',
   [ChainId.RINKEBY]:
     'https://api.thegraph.com/subgraphs/name/ianlapham/uniswap-v2-rinkeby',
+  [ChainId.GNOSIS]:
+    'https://thegraph.com/hosted-service/subgraph/1hive/honeyswap-v2',
 };
 
 const threshold = 0.025;
@@ -69,6 +71,7 @@ export class V2SubgraphProvider implements IV2SubgraphProvider {
     private rollback = true
   ) {
     const subgraphUrl = SUBGRAPH_URL_BY_CHAIN[this.chainId];
+
     if (!subgraphUrl) {
       throw new Error(`No subgraph url for chain id: ${this.chainId}`);
     }

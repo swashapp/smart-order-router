@@ -815,20 +815,18 @@ export class AlphaRouter
 
     const protocolsSet = new Set(protocols ?? []);
 
-    const gasModel = await this.v3GasModelFactory.buildGasModel(
-      this.chainId,
-      gasPriceWei,
-      this.v3PoolProvider,
-      quoteToken,
-      this.l2GasDataProvider
-    );
+    let gasModel = null;
 
-    if (
-      (protocolsSet.size == 0 ||
-        (protocolsSet.has(Protocol.V2) && protocolsSet.has(Protocol.V3))) &&
-      V2_SUPPORTED.includes(this.chainId)
-    ) {
-      log.info({ protocols, tradeType }, 'Routing across all protocols');
+    if (protocolsSet.size == 0 || protocolsSet.has(Protocol.V3)) {
+      log.info({ protocols, tradeType }, 'Routing across V3');
+      gasModel = await this.v3GasModelFactory.buildGasModel(
+        this.chainId,
+        gasPriceWei,
+        this.v3PoolProvider,
+        quoteToken,
+        this.l2GasDataProvider
+      );
+
       quotePromises.push(
         this.getV3Quotes(
           tokenIn,
@@ -841,6 +839,12 @@ export class AlphaRouter
           routingConfig
         )
       );
+    }
+    if (
+      (protocolsSet.size == 0 || protocolsSet.has(Protocol.V2)) &&
+      V2_SUPPORTED.includes(this.chainId)
+    ) {
+      log.info({ protocols, swapType: tradeType }, 'Routing across V2');
       quotePromises.push(
         this.getV2Quotes(
           tokenIn,
@@ -853,40 +857,6 @@ export class AlphaRouter
           routingConfig
         )
       );
-    } else {
-      if (
-        protocolsSet.has(Protocol.V3) ||
-        (protocolsSet.size == 0 && !V2_SUPPORTED.includes(this.chainId))
-      ) {
-        log.info({ protocols, swapType: tradeType }, 'Routing across V3');
-        quotePromises.push(
-          this.getV3Quotes(
-            tokenIn,
-            tokenOut,
-            amounts,
-            percents,
-            quoteToken,
-            gasModel,
-            tradeType,
-            routingConfig
-          )
-        );
-      }
-      if (protocolsSet.has(Protocol.V2)) {
-        log.info({ protocols, swapType: tradeType }, 'Routing across V2');
-        quotePromises.push(
-          this.getV2Quotes(
-            tokenIn,
-            tokenOut,
-            amounts,
-            percents,
-            quoteToken,
-            gasPriceWei,
-            tradeType,
-            routingConfig
-          )
-        );
-      }
     }
 
     const routesWithValidQuotesByProtocol = await Promise.all(quotePromises);
@@ -918,7 +888,7 @@ export class AlphaRouter
       tradeType,
       this.chainId,
       routingConfig,
-      gasModel
+      undefined
     );
 
     if (!swapRouteRaw) {

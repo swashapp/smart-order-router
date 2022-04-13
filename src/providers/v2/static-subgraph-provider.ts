@@ -38,6 +38,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.ARBITRUM_ONE]: [],
   [ChainId.ARBITRUM_RINKEBY]: [],
   [ChainId.OPTIMISTIC_KOVAN]: [],
+  [ChainId.GNOSIS]: [WRAPPED_NATIVE_CURRENCY[ChainId.GNOSIS]!],
   [ChainId.POLYGON]: [],
   [ChainId.POLYGON_MUMBAI]: [],
 };
