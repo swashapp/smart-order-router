@@ -1,0 +1,49 @@
+import { log } from '../../../util/log';
+import { routeToString } from '../../../util/routes';
+import { V2Route, V3Route } from '../../router';
+export function computeAllV3Routes(tokenIn, tokenOut, pools, maxHops) {
+    return computeAllRoutes(tokenIn, tokenOut, (route, tokenIn, tokenOut) => {
+        return new V3Route(route, tokenIn, tokenOut);
+    }, pools, maxHops);
+}
+export function computeAllV2Routes(tokenIn, tokenOut, pools, maxHops) {
+    return computeAllRoutes(tokenIn, tokenOut, (route, tokenIn, tokenOut) => {
+        return new V2Route(route, tokenIn, tokenOut);
+    }, pools, maxHops);
+}
+export function computeAllRoutes(tokenIn, tokenOut, buildRoute, pools, maxHops) {
+    const poolsUsed = Array(pools.length).fill(false);
+    const routes = [];
+    const computeRoutes = (tokenIn, tokenOut, currentRoute, poolsUsed, _previousTokenOut) => {
+        if (currentRoute.length > maxHops) {
+            return;
+        }
+        if (currentRoute.length > 0 &&
+            currentRoute[currentRoute.length - 1].involvesToken(tokenOut)) {
+            routes.push(buildRoute([...currentRoute], tokenIn, tokenOut));
+            return;
+        }
+        for (let i = 0; i < pools.length; i++) {
+            if (poolsUsed[i]) {
+                continue;
+            }
+            const curPool = pools[i];
+            const previousTokenOut = _previousTokenOut ? _previousTokenOut : tokenIn;
+            if (!curPool.involvesToken(previousTokenOut)) {
+                continue;
+            }
+            const currentTokenOut = curPool.token0.equals(previousTokenOut)
+                ? curPool.token1
+                : curPool.token0;
+            currentRoute.push(curPool);
+            poolsUsed[i] = true;
+            computeRoutes(tokenIn, tokenOut, currentRoute, poolsUsed, currentTokenOut);
+            poolsUsed[i] = false;
+            currentRoute.pop();
+        }
+    };
+    computeRoutes(tokenIn, tokenOut, [], poolsUsed);
+    log.info({ routes: routes.map(routeToString) }, `Computed ${routes.length} possible routes.`);
+    return routes;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tcHV0ZS1hbGwtcm91dGVzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vc3JjL3JvdXRlcnMvYWxwaGEtcm91dGVyL2Z1bmN0aW9ucy9jb21wdXRlLWFsbC1yb3V0ZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0EsT0FBTyxFQUFFLEdBQUcsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQ3hDLE9BQU8sRUFBRSxhQUFhLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUNyRCxPQUFPLEVBQUUsT0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLGNBQWMsQ0FBQztBQUVoRCxNQUFNLFVBQVUsa0JBQWtCLENBQ2hDLE9BQWMsRUFDZCxRQUFlLEVBQ2YsS0FBYSxFQUNiLE9BQWU7SUFFZixPQUFPLGdCQUFnQixDQUNyQixPQUFPLEVBQ1AsUUFBUSxFQUNSLENBQUMsS0FBYSxFQUFFLE9BQWMsRUFBRSxRQUFlLEVBQUUsRUFBRTtRQUNqRCxPQUFPLElBQUksT0FBTyxDQUFDLEtBQUssRUFBRSxPQUFPLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDL0MsQ0FBQyxFQUNELEtBQUssRUFDTCxPQUFPLENBQ1IsQ0FBQztBQUNKLENBQUM7QUFFRCxNQUFNLFVBQVUsa0JBQWtCLENBQ2hDLE9BQWMsRUFDZCxRQUFlLEVBQ2YsS0FBYSxFQUNiLE9BQWU7SUFFZixPQUFPLGdCQUFnQixDQUNyQixPQUFPLEVBQ1AsUUFBUSxFQUNSLENBQUMsS0FBYSxFQUFFLE9BQWMsRUFBRSxRQUFlLEVBQUUsRUFBRTtRQUNqRCxPQUFPLElBQUksT0FBTyxDQUFDLEtBQUssRUFBRSxPQUFPLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDL0MsQ0FBQyxFQUNELEtBQUssRUFDTCxPQUFPLENBQ1IsQ0FBQztBQUNKLENBQUM7QUFFRCxNQUFNLFVBQVUsZ0JBQWdCLENBSTlCLE9BQWMsRUFDZCxRQUFlLEVBQ2YsVUFBdUUsRUFDdkUsS0FBYyxFQUNkLE9BQWU7SUFFZixNQUFNLFNBQVMsR0FBRyxLQUFLLENBQVUsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUMzRCxNQUFNLE1BQU0sR0FBYSxFQUFFLENBQUM7SUFFNUIsTUFBTSxhQUFhLEdBQUcsQ0FDcEIsT0FBYyxFQUNkLFFBQWUsRUFDZixZQUFxQixFQUNyQixTQUFvQixFQUNwQixpQkFBeUIsRUFDekIsRUFBRTtRQUNGLElBQUksWUFBWSxDQUFDLE1BQU0sR0FBRyxPQUFPLEVBQUU7WUFDakMsT0FBTztTQUNSO1FBRUQsSUFDRSxZQUFZLENBQUMsTUFBTSxHQUFHLENBQUM7WUFDdkIsWUFBWSxDQUFDLFlBQVksQ0FBQyxNQUFNLEdBQUcsQ0FBQyxDQUFFLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxFQUM5RDtZQUNBLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsR0FBRyxZQUFZLENBQUMsRUFBRSxPQUFPLEVBQUUsUUFBUSxDQUFDLENBQUMsQ0FBQztZQUM5RCxPQUFPO1NBQ1I7UUFFRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUNyQyxJQUFJLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRTtnQkFDaEIsU0FBUzthQUNWO1lBRUQsTUFBTSxPQUFPLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBRSxDQUFDO1lBQzFCLE1BQU0sZ0JBQWdCLEdBQUcsaUJBQWlCLENBQUMsQ0FBQyxDQUFDLGlCQUFpQixDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFFekUsSUFBSSxDQUFDLE9BQU8sQ0FBQyxhQUFhLENBQUMsZ0JBQWdCLENBQUMsRUFBRTtnQkFDNUMsU0FBUzthQUNWO1lBRUQsTUFBTSxlQUFlLEdBQUcsT0FBTyxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsZ0JBQWdCLENBQUM7Z0JBQzdELENBQUMsQ0FBQyxPQUFPLENBQUMsTUFBTTtnQkFDaEIsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUM7WUFFbkIsWUFBWSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUMzQixTQUFTLENBQUMsQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDO1lBQ3BCLGFBQWEsQ0FDWCxPQUFPLEVBQ1AsUUFBUSxFQUNSLFlBQVksRUFDWixTQUFTLEVBQ1QsZUFBZSxDQUNoQixDQUFDO1lBQ0YsU0FBUyxDQUFDLENBQUMsQ0FBQyxHQUFHLEtBQUssQ0FBQztZQUNyQixZQUFZLENBQUMsR0FBRyxFQUFFLENBQUM7U0FDcEI7SUFDSCxDQUFDLENBQUM7SUFFRixhQUFhLENBQUMsT0FBTyxFQUFFLFFBQVEsRUFBRSxFQUFFLEVBQUUsU0FBUyxDQUFDLENBQUM7SUFFaEQsR0FBRyxDQUFDLElBQUksQ0FDTixFQUFFLE1BQU0sRUFBRSxNQUFNLENBQUMsR0FBRyxDQUFDLGFBQWEsQ0FBQyxFQUFFLEVBQ3JDLFlBQVksTUFBTSxDQUFDLE1BQU0sbUJBQW1CLENBQzdDLENBQUM7SUFFRixPQUFPLE1BQU0sQ0FBQztBQUNoQixDQUFDIn0=
