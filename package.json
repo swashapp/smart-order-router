@@ -42,7 +42,7 @@
     "@uniswap/router-sdk": "^1.0.5",
     "@uniswap/swap-router-contracts": "1.2.0",
     "@uniswap/token-lists": "^1.0.0-beta.25",
-    "@uniswap/v2-sdk": "github:swashapp/v2-sdk#4faf3ac0f731073758448d155fa3186689f69525",
+    "@uniswap/v2-sdk": "github:swashapp/v2-sdk#4068552e1b3734d1f5a73cae4bf649a0d7bc52ad",
     "@uniswap/v3-sdk": "^3.7.0",
     "async-retry": "^1.3.1",
     "await-timeout": "^1.1.1",

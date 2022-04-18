@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -39,4 +43,4 @@ __exportStar(require("./v3/static-subgraph-provider"), exports);
 __exportStar(require("./v3/subgraph-provider"), exports);
 __exportStar(require("./v3/subgraph-provider-with-fallback"), exports);
 __exportStar(require("./v3/uri-subgraph-provider"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvcHJvdmlkZXJzL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7OztBQUFBLDBDQUF3QjtBQUN4QiwrQ0FBNkI7QUFDN0IseURBQXVDO0FBQ3ZDLGdFQUE4QztBQUM5QywyREFBeUM7QUFDekMsZ0VBQThDO0FBQzlDLDRFQUEwRDtBQUMxRCx1REFBcUM7QUFDckMsOERBQTRDO0FBQzVDLHVEQUFxQztBQUNyQywrREFBNkM7QUFDN0MsZ0VBQThDO0FBQzlDLHlEQUF1QztBQUN2QyxtREFBaUM7QUFDakMsMERBQXdDO0FBQ3hDLGlFQUErQztBQUMvQyxxREFBbUM7QUFDbkMsc0RBQW9DO0FBQ3BDLGdFQUE4QztBQUM5Qyx5REFBdUM7QUFDdkMsdUVBQXFEO0FBQ3JELDZEQUEyQztBQUMzQyxpRUFBK0M7QUFDL0MscURBQW1DO0FBQ25DLHNEQUFvQztBQUNwQyxnRUFBOEM7QUFDOUMseURBQXVDO0FBQ3ZDLHVFQUFxRDtBQUNyRCw2REFBMkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvcHJvdmlkZXJzL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwwQ0FBd0I7QUFDeEIsK0NBQTZCO0FBQzdCLHlEQUF1QztBQUN2QyxnRUFBOEM7QUFDOUMsMkRBQXlDO0FBQ3pDLGdFQUE4QztBQUM5Qyw0RUFBMEQ7QUFDMUQsdURBQXFDO0FBQ3JDLDhEQUE0QztBQUM1Qyx1REFBcUM7QUFDckMsK0RBQTZDO0FBQzdDLGdFQUE4QztBQUM5Qyx5REFBdUM7QUFDdkMsbURBQWlDO0FBQ2pDLDBEQUF3QztBQUN4QyxpRUFBK0M7QUFDL0MscURBQW1DO0FBQ25DLHNEQUFvQztBQUNwQyxnRUFBOEM7QUFDOUMseURBQXVDO0FBQ3ZDLHVFQUFxRDtBQUNyRCw2REFBMkM7QUFDM0MsaUVBQStDO0FBQy9DLHFEQUFtQztBQUNuQyxzREFBb0M7QUFDcEMsZ0VBQThDO0FBQzlDLHlEQUF1QztBQUN2Qyx1RUFBcUQ7QUFDckQsNkRBQTJDIn0=

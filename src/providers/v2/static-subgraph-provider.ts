@@ -7,9 +7,9 @@ import {
   DAI_MAINNET,
   DAI_RINKEBY_1,
   DAI_RINKEBY_2,
-  USDC_MAINNET,
-  USDT_MAINNET,
-  WBTC_MAINNET,
+  USDC_MAINNET, USDC_POLYGON,
+  USDT_MAINNET, USDT_POLYGON,
+  WBTC_MAINNET, WETH_POLYGON, WMATIC_POLYGON
 } from '../token-provider';
 import { IV2SubgraphProvider, V2SubgraphPool } from './subgraph-provider';
 
@@ -39,7 +39,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.ARBITRUM_RINKEBY]: [],
   [ChainId.OPTIMISTIC_KOVAN]: [],
   [ChainId.GNOSIS]: [WRAPPED_NATIVE_CURRENCY[ChainId.GNOSIS]!],
-  [ChainId.POLYGON]: [],
+  [ChainId.POLYGON]: [USDT_POLYGON,USDC_POLYGON, WETH_POLYGON, WMATIC_POLYGON],
   [ChainId.POLYGON_MUMBAI]: [],
 };
 

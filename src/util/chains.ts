@@ -21,6 +21,7 @@ export const V2_SUPPORTED = [
   ChainId.RINKEBY,
   ChainId.ROPSTEN,
   ChainId.GNOSIS,
+  ChainId.POLYGON,
 ];
 
 export const HAS_L1_FEE = [

@@ -72,6 +72,7 @@ export declare const GNO_GNOSIS: Token;
 export declare const WMATIC_POLYGON: Token;
 export declare const WETH_POLYGON: Token;
 export declare const USDC_POLYGON: Token;
+export declare const USDT_POLYGON: Token;
 export declare const DAI_POLYGON: Token;
 export declare const WMATIC_POLYGON_MUMBAI: Token;
 export declare const USDC_POLYGON_MUMBAI: Token;

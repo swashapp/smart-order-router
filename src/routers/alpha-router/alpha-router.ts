@@ -840,6 +840,8 @@ export class AlphaRouter
         )
       );
     }
+    console.log('V2_SUPPORTED');
+    console.log(V2_SUPPORTED);
     if (
       (protocolsSet.size == 0 || protocolsSet.has(Protocol.V2)) &&
       V2_SUPPORTED.includes(this.chainId)
