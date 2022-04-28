@@ -485,19 +485,25 @@ export class AlphaRouter
     if (v2SubgraphProvider) {
       this.v2SubgraphProvider = v2SubgraphProvider;
     } else {
-      this.v2SubgraphProvider = new V2SubgraphProviderWithFallBacks([
-        new CachingV2SubgraphProvider(
-          chainId,
-          new URISubgraphProvider(
+      if(chainId===ChainId.RINKEBY){
+        this.v2SubgraphProvider = new V2SubgraphProviderWithFallBacks([
+          new StaticV2SubgraphProvider(chainId),
+        ]);
+      }else {
+        this.v2SubgraphProvider = new V2SubgraphProviderWithFallBacks([
+          new CachingV2SubgraphProvider(
             chainId,
-            `https://cloudflare-ipfs.com/ipns/api.uniswap.org/v1/pools/v2/${chainName}.json`,
-            undefined,
-            0
+            new URISubgraphProvider(
+              chainId,
+              `https://cloudflare-ipfs.com/ipns/api.uniswap.org/v1/pools/v2/${chainName}.json`,
+              undefined,
+              0
+            ),
+            new NodeJSCache(new NodeCache({ stdTTL: 300, useClones: false }))
           ),
-          new NodeJSCache(new NodeCache({ stdTTL: 300, useClones: false }))
-        ),
-        new StaticV2SubgraphProvider(chainId),
-      ]);
+          new StaticV2SubgraphProvider(chainId),
+        ]);
+      }
     }
 
     if (v3SubgraphProvider) {
