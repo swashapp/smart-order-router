@@ -1,8 +1,8 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
-import { ContractFactory, Overrides, Signer } from "ethers";
 import type { UniswapInterfaceMulticall, UniswapInterfaceMulticallInterface } from "../UniswapInterfaceMulticall";
 export declare class UniswapInterfaceMulticall__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<UniswapInterfaceMulticall>;
