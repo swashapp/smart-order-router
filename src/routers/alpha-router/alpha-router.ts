@@ -485,11 +485,11 @@ export class AlphaRouter
     if (v2SubgraphProvider) {
       this.v2SubgraphProvider = v2SubgraphProvider;
     } else {
-      if(chainId===ChainId.RINKEBY){
+      if (chainId === ChainId.RINKEBY || chainId === ChainId.GÖRLI) {
         this.v2SubgraphProvider = new V2SubgraphProviderWithFallBacks([
           new StaticV2SubgraphProvider(chainId),
         ]);
-      }else {
+      } else {
         this.v2SubgraphProvider = new V2SubgraphProviderWithFallBacks([
           new CachingV2SubgraphProvider(
             chainId,
