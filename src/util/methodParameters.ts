@@ -88,7 +88,7 @@ export function buildTrade<TTradeType extends TradeType>(
     }
   );
 
-  const v2Routes = _.map<
+  const v2Routes: any = _.map<
     V2RouteWithValidQuote,
     {
       routev2: V2RouteRaw<Currency, Currency>;
