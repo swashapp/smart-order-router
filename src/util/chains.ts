@@ -4,6 +4,7 @@ export enum ChainId {
   ROPSTEN = 3,
   RINKEBY = 4,
   GÖRLI = 5,
+  BSCTESTNET = 97,
   KOVAN = 42,
   OPTIMISM = 10,
   OPTIMISTIC_KOVAN = 69,
@@ -18,6 +19,7 @@ export const V2_SUPPORTED = [
   ChainId.MAINNET,
   ChainId.KOVAN,
   ChainId.GÖRLI,
+  ChainId.BSCTESTNET,
   ChainId.RINKEBY,
   ChainId.ROPSTEN,
   ChainId.GNOSIS,
@@ -41,6 +43,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.RINKEBY;
     case 5:
       return ChainId.GÖRLI;
+    case 97:
+      return ChainId.BSCTESTNET;
     case 42:
       return ChainId.KOVAN;
     case 10:
@@ -68,6 +72,7 @@ export enum ChainName {
   ROPSTEN = 'ropsten',
   RINKEBY = 'rinkeby',
   GÖRLI = 'goerli',
+  BSCTESTNET = 'bsctestnet',
   KOVAN = 'kovan',
   OPTIMISM = 'optimism-mainnet',
   OPTIMISTIC_KOVAN = 'optimism-kovan',
@@ -83,6 +88,7 @@ export enum NativeCurrencyName {
   ETHER = 'ETH',
   MATIC = 'MATIC',
   XDAI = 'XDAI',
+  BNB = 'BNB',
 }
 
 export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
@@ -90,6 +96,7 @@ export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
   [ChainId.ROPSTEN]: NativeCurrencyName.ETHER,
   [ChainId.RINKEBY]: NativeCurrencyName.ETHER,
   [ChainId.GÖRLI]: NativeCurrencyName.ETHER,
+  [ChainId.BSCTESTNET]: NativeCurrencyName.BNB,
   [ChainId.KOVAN]: NativeCurrencyName.ETHER,
   [ChainId.OPTIMISM]: NativeCurrencyName.ETHER,
   [ChainId.OPTIMISTIC_KOVAN]: NativeCurrencyName.ETHER,
@@ -110,6 +117,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.RINKEBY;
     case 5:
       return ChainName.GÖRLI;
+    case 97:
+      return ChainName.BSCTESTNET;
     case 42:
       return ChainName.KOVAN;
     case 10:
@@ -145,6 +154,8 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
       return process.env.JSON_RPC_PROVIDER_RINKEBY!;
     case ChainId.GÖRLI:
       return process.env.JSON_RPC_PROVIDER_GÖRLI!;
+    case ChainId.BSCTESTNET:
+      return process.env.JSON_RPC_PROVIDER_BSCTESTNET!;
     case ChainId.KOVAN:
       return process.env.JSON_RPC_PROVIDER_KOVAN!;
     case ChainId.OPTIMISM:
@@ -194,6 +205,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     18,
     'WETH',
     'Wrapped Ether'
+  ),
+  [ChainId.BSCTESTNET]: new Token(
+    97,
+    '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+    18,
+    'WBNB',
+    'Wrapped BNB'
   ),
   [ChainId.KOVAN]: new Token(
     42,

@@ -19,6 +19,7 @@ import {
   DAI_POLYGON_MUMBAI,
   DAI_RINKEBY_1,
   DAI_RINKEBY_2,
+  DAI_BSCTESTNET,
   FEI_MAINNET,
   ITokenProvider,
   USDC_ARBITRUM,
@@ -128,6 +129,7 @@ const baseTokensByChain: { [chainId in ChainId]?: Token[] } = {
   [ChainId.GNOSIS]: [USDC_GNOSIS, USDT_GNOSIS, WXDAI_GNOSIS],
   [ChainId.POLYGON]: [USDC_POLYGON, WMATIC_POLYGON],
   [ChainId.POLYGON_MUMBAI]: [DAI_POLYGON_MUMBAI, WMATIC_POLYGON_MUMBAI],
+  [ChainId.BSCTESTNET]: [DAI_BSCTESTNET],
 };
 
 export async function getV3CandidatePools({
@@ -712,6 +714,8 @@ export async function getV2CandidatePools({
   // Note: we do not need to check other native currencies for the V2 Protocol
   let topByEthQuoteTokenPool: V2SubgraphPool[] = [];
   if (
+    tokenOut.symbol != 'WBNB' &&
+    tokenOut.symbol != 'BNB' &&
     tokenOut.symbol != 'WETH' &&
     tokenOut.symbol != 'WETH9' &&
     tokenOut.symbol != 'ETH'

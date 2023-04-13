@@ -29,6 +29,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST = (
     [ChainId.ROPSTEN]: [WRAPPED_NATIVE_CURRENCY[ChainId.ROPSTEN]!],
     [ChainId.RINKEBY]: [WRAPPED_NATIVE_CURRENCY[ChainId.RINKEBY]!],
     [ChainId.GÖRLI]: [WRAPPED_NATIVE_CURRENCY[ChainId.GÖRLI]!],
+    [ChainId.BSCTESTNET]: [WRAPPED_NATIVE_CURRENCY[ChainId.BSCTESTNET]!],
     [ChainId.KOVAN]: [WRAPPED_NATIVE_CURRENCY[ChainId.KOVAN]!],
     [ChainId.OPTIMISM]: [WRAPPED_NATIVE_CURRENCY[ChainId.OPTIMISM]!],
     [ChainId.OPTIMISTIC_KOVAN]: [
@@ -62,11 +63,9 @@ const getBasePairByAddress = async (
 
 export const ADDITIONAL_BASES = async (
   tokenProvider: ITokenProvider
-): Promise<
-  {
-    [chainId in ChainId]?: { [tokenAddress: string]: Token[] };
-  }
-> => {
+): Promise<{
+  [chainId in ChainId]?: { [tokenAddress: string]: Token[] };
+}> => {
   return {
     [ChainId.MAINNET]: {
       ...(await getBasePairByAddress(
@@ -127,11 +126,9 @@ export const ADDITIONAL_BASES = async (
  */
 export const CUSTOM_BASES = async (
   tokenProvider: ITokenProvider
-): Promise<
-  {
-    [chainId in ChainId]?: { [tokenAddress: string]: Token[] };
-  }
-> => {
+): Promise<{
+  [chainId in ChainId]?: { [tokenAddress: string]: Token[] };
+}> => {
   return {
     [ChainId.MAINNET]: {
       ...(await getBasePairByAddress(

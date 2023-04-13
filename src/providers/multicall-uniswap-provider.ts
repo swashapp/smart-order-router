@@ -5,7 +5,10 @@ import stats from 'stats-lite';
 import { UniswapInterfaceMulticall__factory } from '../types/v3/factories/UniswapInterfaceMulticall__factory';
 import { UniswapInterfaceMulticall } from '../types/v3/UniswapInterfaceMulticall';
 import { ChainId } from '../util';
-import { UNISWAP_MULTICALL_ADDRESS } from '../util/addresses';
+import {
+  BSCTESTNET_MULTICALL_ADDRESS,
+  UNISWAP_MULTICALL_ADDRESS,
+} from '../util/addresses';
 import { log } from '../util/log';
 import {
   CallMultipleFunctionsOnSameContractParams,
@@ -25,6 +28,7 @@ const contractAddressByChain: { [chainId in ChainId]?: string } = {
   [ChainId.KOVAN]: UNISWAP_MULTICALL_ADDRESS,
   [ChainId.ROPSTEN]: UNISWAP_MULTICALL_ADDRESS,
   [ChainId.GÖRLI]: UNISWAP_MULTICALL_ADDRESS,
+  [ChainId.BSCTESTNET]: BSCTESTNET_MULTICALL_ADDRESS,
 };
 
 /**
@@ -43,7 +47,7 @@ export class UniswapMulticallProvider extends IMulticallProvider<UniswapMultical
     protected chainId: ChainId,
     protected provider: BaseProvider,
     protected gasLimitPerCall = 1_000_000,
-    protected multicallAddressOverride = UNISWAP_MULTICALL_ADDRESS
+    protected multicallAddressOverride: string | undefined = undefined
   ) {
     super();
     const multicallAddress = multicallAddressOverride

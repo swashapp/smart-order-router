@@ -148,6 +148,14 @@ export const DAI_GÖRLI = new Token(
   'Dai Stablecoin'
 );
 
+export const DAI_BSCTESTNET = new Token(
+  ChainId.BSCTESTNET,
+  '0x1209BFE443F306d2049629f136784Cd1596C5604',
+  18,
+  'DAI',
+  'Dai Stablecoin'
+);
+
 export const USDC_KOVAN = new Token(
   ChainId.KOVAN,
   '0x31eeb2d0f9b6fd8642914ab10f4dd473677d80df',

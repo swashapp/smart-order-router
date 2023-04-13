@@ -18,9 +18,9 @@ export declare class UniswapMulticallProvider extends IMulticallProvider<Uniswap
     protected chainId: ChainId;
     protected provider: BaseProvider;
     protected gasLimitPerCall: number;
-    protected multicallAddressOverride: string;
+    protected multicallAddressOverride: string | undefined;
     private multicallContract;
-    constructor(chainId: ChainId, provider: BaseProvider, gasLimitPerCall?: number, multicallAddressOverride?: string);
+    constructor(chainId: ChainId, provider: BaseProvider, gasLimitPerCall?: number, multicallAddressOverride?: string | undefined);
     callSameFunctionOnMultipleContracts<TFunctionParams extends any[] | undefined, TReturn = any>(params: CallSameFunctionOnMultipleContractsParams<TFunctionParams>): Promise<{
         blockNumber: BigNumber;
         results: Result<TReturn>[];

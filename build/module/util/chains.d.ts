@@ -4,6 +4,7 @@ export declare enum ChainId {
     ROPSTEN = 3,
     RINKEBY = 4,
     GÖRLI = 5,
+    BSCTESTNET = 97,
     KOVAN = 42,
     OPTIMISM = 10,
     OPTIMISTIC_KOVAN = 69,
@@ -21,6 +22,7 @@ export declare enum ChainName {
     ROPSTEN = "ropsten",
     RINKEBY = "rinkeby",
     GÖRLI = "goerli",
+    BSCTESTNET = "bsctestnet",
     KOVAN = "kovan",
     OPTIMISM = "optimism-mainnet",
     OPTIMISTIC_KOVAN = "optimism-kovan",
@@ -33,7 +35,8 @@ export declare enum ChainName {
 export declare enum NativeCurrencyName {
     ETHER = "ETH",
     MATIC = "MATIC",
-    XDAI = "XDAI"
+    XDAI = "XDAI",
+    BNB = "BNB"
 }
 export declare const NATIVE_CURRENCY: {
     [chainId: number]: NativeCurrencyName;

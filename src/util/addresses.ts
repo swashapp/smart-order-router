@@ -16,6 +16,8 @@ export const V3_MIGRATOR_ADDRESS = '0xA5644E29708357803b5A882D272c41cC0dF92B34';
 export const UNISWAP_MULTICALL_ADDRESS =
   '0x1F98415757620B543A52E61c46B32eB19261F984';
 export const MULTICALL2_ADDRESS = '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696';
+export const BSCTESTNET_MULTICALL_ADDRESS =
+  '0x4445286592CaADEB59917f16826B964C3e7B2D36';
 
 export const WETH9: {
   [chainId in Exclude<
@@ -47,6 +49,13 @@ export const WETH9: {
   [ChainId.GÖRLI]: new Token(
     ChainId.GÖRLI,
     '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.BSCTESTNET]: new Token(
+    ChainId.BSCTESTNET,
+    '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     18,
     'WETH',
     'Wrapped Ether'

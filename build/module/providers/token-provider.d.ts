@@ -39,6 +39,7 @@ export declare const USDC_GÖRLI: Token;
 export declare const USDT_GÖRLI: Token;
 export declare const WBTC_GÖRLI: Token;
 export declare const DAI_GÖRLI: Token;
+export declare const DAI_BSCTESTNET: Token;
 export declare const USDC_KOVAN: Token;
 export declare const USDT_KOVAN: Token;
 export declare const WBTC_KOVAN: Token;
