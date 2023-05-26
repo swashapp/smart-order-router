@@ -25,6 +25,7 @@ import {
   CachingV3SubgraphProvider,
   EIP1559GasPriceProvider,
   ETHGasStationInfoProvider,
+  GnosisV2SubgraphProvider,
   ISwapRouterProvider,
   IV2QuoteProvider,
   IV2SubgraphProvider,
@@ -484,9 +485,19 @@ export class AlphaRouter
     // ipfs urls in the following format: `https://cloudflare-ipfs.com/ipns/api.uniswap.org/v1/pools/${protocol}/${chainName}.json`;
     if (v2SubgraphProvider) {
       this.v2SubgraphProvider = v2SubgraphProvider;
+    } else if (ChainId.GNOSIS === chainId) {
+      this.v2SubgraphProvider = new V2SubgraphProviderWithFallBacks([
+        new GnosisV2SubgraphProvider(chainId),
+      ]);
     } else {
       if (
-        [ChainId.RINKEBY, ChainId.GÖRLI, ChainId.BSCTESTNET].includes(chainId)
+        [
+          ChainId.RINKEBY,
+          ChainId.GÖRLI,
+          ChainId.BSCTESTNET,
+          ChainId.BSC,
+          ChainId.POLYGON,
+        ].includes(chainId)
       ) {
         this.v2SubgraphProvider = new V2SubgraphProviderWithFallBacks([
           new StaticV2SubgraphProvider(chainId),

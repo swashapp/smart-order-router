@@ -1,5 +1,5 @@
-import { Signer } from "ethers";
 import { Provider } from "@ethersproject/providers";
+import { Signer } from "ethers";
 import type { ITokenValidator, ITokenValidatorInterface } from "../ITokenValidator";
 export declare class ITokenValidator__factory {
     static readonly abi: {

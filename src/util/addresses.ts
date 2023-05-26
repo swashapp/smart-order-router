@@ -18,6 +18,12 @@ export const UNISWAP_MULTICALL_ADDRESS =
 export const MULTICALL2_ADDRESS = '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696';
 export const BSCTESTNET_MULTICALL_ADDRESS =
   '0x4445286592CaADEB59917f16826B964C3e7B2D36';
+export const BSC_MULTICALL_ADDRESS =
+  '0xac1cE734566f390A94b00eb9bf561c2625BF44ea';
+export const POLYGON_MULTICALL_ADDRESS =
+  '0x1F98415757620B543A52E61c46B32eB19261F984';
+export const GNOSIS_MULTICALL_ADDRESS =
+  '0xe56A6B2Ed6fA3c7c3b9a4A2cE0A51d5dd0f5b8E5';
 
 export const WETH9: {
   [chainId in Exclude<
@@ -56,6 +62,13 @@ export const WETH9: {
   [ChainId.BSCTESTNET]: new Token(
     ChainId.BSCTESTNET,
     '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [ChainId.BSC]: new Token(
+    ChainId.BSC,
+    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     18,
     'WETH',
     'Wrapped Ether'

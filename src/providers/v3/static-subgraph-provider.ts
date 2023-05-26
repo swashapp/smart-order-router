@@ -4,10 +4,10 @@ import JSBI from 'jsbi';
 import _ from 'lodash';
 import { unparseFeeAmount } from '../../util/amounts';
 import { ChainId, WRAPPED_NATIVE_CURRENCY } from '../../util/chains';
-import { log } from '../../util/log';
 import {
   DAI_ARBITRUM,
   DAI_ARBITRUM_RINKEBY,
+  DAI_BSCTESTNET,
   DAI_GÖRLI,
   DAI_KOVAN,
   DAI_MAINNET,
@@ -17,7 +17,6 @@ import {
   DAI_RINKEBY_1,
   DAI_RINKEBY_2,
   DAI_ROPSTEN,
-  DAI_BSCTESTNET,
   UNI_ARBITRUM_RINKEBY,
   USDC_ARBITRUM,
   USDC_GÖRLI,
@@ -30,6 +29,8 @@ import {
   USDC_ROPSTEN,
   USDT_ARBITRUM,
   USDT_ARBITRUM_RINKEBY,
+  USDT_BSC,
+  USDT_GNOSIS,
   USDT_GÖRLI,
   USDT_KOVAN,
   USDT_MAINNET,
@@ -86,6 +87,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     WRAPPED_NATIVE_CURRENCY[ChainId.BSCTESTNET]!,
     DAI_BSCTESTNET,
   ],
+  [ChainId.BSC]: [WRAPPED_NATIVE_CURRENCY[ChainId.BSC]!, USDT_BSC],
   [ChainId.KOVAN]: [
     WRAPPED_NATIVE_CURRENCY[ChainId.KOVAN]!,
     USDC_KOVAN,
@@ -120,7 +122,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     USDT_OPTIMISTIC_KOVAN,
     USDC_OPTIMISTIC_KOVAN,
   ],
-  [ChainId.GNOSIS]: [],
+  [ChainId.GNOSIS]: [WRAPPED_NATIVE_CURRENCY[ChainId.GNOSIS]!, USDT_GNOSIS],
   [ChainId.POLYGON]: [USDC_POLYGON, WETH_POLYGON, WMATIC_POLYGON],
   [ChainId.POLYGON_MUMBAI]: [
     DAI_POLYGON_MUMBAI,
@@ -150,7 +152,7 @@ export class StaticV3SubgraphProvider implements IV3SubgraphProvider {
     tokenIn?: Token,
     tokenOut?: Token
   ): Promise<V3SubgraphPool[]> {
-    log.info('In static subgraph provider for V3');
+    console.log('In static subgraph provider for V3');
     const bases = BASES_TO_CHECK_TRADES_AGAINST[this.chainId];
 
     const basePairs: [Token, Token][] = _.flatMap(
@@ -184,7 +186,7 @@ export class StaticV3SubgraphProvider implements IV3SubgraphProvider {
       })
       .value();
 
-    log.info(
+    console.log(
       `V3 Static subgraph provider about to get ${pairs.length} pools on-chain`
     );
     const poolAccessor = await this.poolProvider.getPools(pairs);

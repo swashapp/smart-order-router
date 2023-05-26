@@ -1,5 +1,5 @@
-import { Signer } from "ethers";
 import { Provider } from "@ethersproject/providers";
+import { Signer } from "ethers";
 import type { GasDataArbitrum, GasDataArbitrumInterface } from "../GasDataArbitrum";
 export declare class GasDataArbitrum__factory {
     static readonly abi: {

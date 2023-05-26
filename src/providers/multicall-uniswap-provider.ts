@@ -7,6 +7,9 @@ import { UniswapInterfaceMulticall } from '../types/v3/UniswapInterfaceMulticall
 import { ChainId } from '../util';
 import {
   BSCTESTNET_MULTICALL_ADDRESS,
+  BSC_MULTICALL_ADDRESS,
+  GNOSIS_MULTICALL_ADDRESS,
+  POLYGON_MULTICALL_ADDRESS,
   UNISWAP_MULTICALL_ADDRESS,
 } from '../util/addresses';
 import { log } from '../util/log';
@@ -29,6 +32,9 @@ const contractAddressByChain: { [chainId in ChainId]?: string } = {
   [ChainId.ROPSTEN]: UNISWAP_MULTICALL_ADDRESS,
   [ChainId.GÖRLI]: UNISWAP_MULTICALL_ADDRESS,
   [ChainId.BSCTESTNET]: BSCTESTNET_MULTICALL_ADDRESS,
+  [ChainId.BSC]: BSC_MULTICALL_ADDRESS,
+  [ChainId.POLYGON]: POLYGON_MULTICALL_ADDRESS,
+  [ChainId.GNOSIS]: GNOSIS_MULTICALL_ADDRESS,
 };
 
 /**

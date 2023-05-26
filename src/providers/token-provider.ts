@@ -156,6 +156,14 @@ export const DAI_BSCTESTNET = new Token(
   'Dai Stablecoin'
 );
 
+export const USDT_BSC = new Token(
+  ChainId.BSC,
+  '0x55d398326f99059ff775485246999027b3197955',
+  18,
+  'USDT',
+  'Tether USD'
+);
+
 export const USDC_KOVAN = new Token(
   ChainId.KOVAN,
   '0x31eeb2d0f9b6fd8642914ab10f4dd473677d80df',

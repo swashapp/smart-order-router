@@ -1,5 +1,5 @@
-import { Signer } from "ethers";
 import { Provider } from "@ethersproject/providers";
+import { Signer } from "ethers";
 import type { GasPriceOracle, GasPriceOracleInterface } from "../GasPriceOracle";
 export declare class GasPriceOracle__factory {
     static readonly abi: ({

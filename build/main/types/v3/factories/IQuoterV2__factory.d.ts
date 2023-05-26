@@ -1,5 +1,5 @@
-import { Signer } from "ethers";
 import { Provider } from "@ethersproject/providers";
+import { Signer } from "ethers";
 import type { IQuoterV2, IQuoterV2Interface } from "../IQuoterV2";
 export declare class IQuoterV2__factory {
     static readonly abi: ({

@@ -1,5 +1,5 @@
-import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
+import { ContractFactory, Overrides, Signer } from "ethers";
 import type { SwapRouter02, SwapRouter02Interface } from "../SwapRouter02";
 export declare class SwapRouter02__factory extends ContractFactory {
     constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);

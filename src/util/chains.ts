@@ -5,6 +5,7 @@ export enum ChainId {
   RINKEBY = 4,
   GÖRLI = 5,
   BSCTESTNET = 97,
+  BSC = 56,
   KOVAN = 42,
   OPTIMISM = 10,
   OPTIMISTIC_KOVAN = 69,
@@ -20,6 +21,7 @@ export const V2_SUPPORTED = [
   ChainId.KOVAN,
   ChainId.GÖRLI,
   ChainId.BSCTESTNET,
+  ChainId.BSC,
   ChainId.RINKEBY,
   ChainId.ROPSTEN,
   ChainId.GNOSIS,
@@ -45,6 +47,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.GÖRLI;
     case 97:
       return ChainId.BSCTESTNET;
+    case 56:
+      return ChainId.BSC;
     case 42:
       return ChainId.KOVAN;
     case 10:
@@ -73,6 +77,7 @@ export enum ChainName {
   RINKEBY = 'rinkeby',
   GÖRLI = 'goerli',
   BSCTESTNET = 'bsctestnet',
+  BSC = 'bsc',
   KOVAN = 'kovan',
   OPTIMISM = 'optimism-mainnet',
   OPTIMISTIC_KOVAN = 'optimism-kovan',
@@ -97,6 +102,7 @@ export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
   [ChainId.RINKEBY]: NativeCurrencyName.ETHER,
   [ChainId.GÖRLI]: NativeCurrencyName.ETHER,
   [ChainId.BSCTESTNET]: NativeCurrencyName.BNB,
+  [ChainId.BSC]: NativeCurrencyName.BNB,
   [ChainId.KOVAN]: NativeCurrencyName.ETHER,
   [ChainId.OPTIMISM]: NativeCurrencyName.ETHER,
   [ChainId.OPTIMISTIC_KOVAN]: NativeCurrencyName.ETHER,
@@ -119,6 +125,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.GÖRLI;
     case 97:
       return ChainName.BSCTESTNET;
+    case 56:
+      return ChainName.BSC;
     case 42:
       return ChainName.KOVAN;
     case 10:
@@ -156,6 +164,8 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
       return process.env.JSON_RPC_PROVIDER_GÖRLI!;
     case ChainId.BSCTESTNET:
       return process.env.JSON_RPC_PROVIDER_BSCTESTNET!;
+    case ChainId.BSC:
+      return process.env.JSON_RPC_PROVIDER_BSC!;
     case ChainId.KOVAN:
       return process.env.JSON_RPC_PROVIDER_KOVAN!;
     case ChainId.OPTIMISM:
@@ -209,6 +219,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
   [ChainId.BSCTESTNET]: new Token(
     97,
     '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+    18,
+    'WBNB',
+    'Wrapped BNB'
+  ),
+  [ChainId.BSC]: new Token(
+    56,
+    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     18,
     'WBNB',
     'Wrapped BNB'

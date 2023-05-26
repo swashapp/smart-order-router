@@ -21,6 +21,15 @@ export interface V2SubgraphPool {
 export interface IV2SubgraphProvider {
     getPools(tokenIn?: Token, tokenOut?: Token, providerConfig?: ProviderConfig): Promise<V2SubgraphPool[]>;
 }
+export declare class GnosisV2SubgraphProvider implements IV2SubgraphProvider {
+    private chainId;
+    private retries;
+    private timeout;
+    private rollback;
+    private client;
+    constructor(chainId: ChainId, retries?: number, timeout?: number, rollback?: boolean);
+    getPools(_tokenIn?: Token, _tokenOut?: Token, providerConfig?: ProviderConfig): Promise<V2SubgraphPool[]>;
+}
 export declare class V2SubgraphProvider implements IV2SubgraphProvider {
     private chainId;
     private retries;
